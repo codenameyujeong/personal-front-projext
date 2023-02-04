@@ -25,12 +25,11 @@ function App() {
   // let [a, c] = [1, 2];//a는1 c는2
   // let [글제목, a] = useState(['남자 코트 추천', '강남 우동맛집', '파이썬독학']);
   let [따봉, 따봉변경] = useState(0);//state변경함수 따봉변경
+  let [글제목, 글제목변경] = useState( ['남자코트 추천', '강남 우동맛집', '파이썬 독학', '새우깡 맛집'] );   
+  let [클릭, 클릭변경] = useState(1);
   
+  let [modal,setModal]= useState(false);
 
-  
-    let [글제목, 글제목변경] = useState( ['남자코트 추천', '강남 우동맛집', '파이썬 독학', '새우깡 맛집'] );  
-    
-    let [클릭, 클릭변경] = useState(1);
   return (
     <div className="App">
      <div className="black-nav">
@@ -52,16 +51,28 @@ function App() {
      <p>2월 17일 발행</p>
      </div>
      <div className="list">
-     <h4>{글제목[2]}</h4>
+     <h4 onClick={()=>{ setModal(true)}}>{ 글제목[2] }</h4>
      <p>2월 17일 발행</p>
      </div>
-     <div className='list'>
-      <h4>{글제목[3]} <span onClick={()=>{ 클릭변경(클릭+1) }}>👍</span></h4>
-      <p>2월 17일 발행</p>
-     </div>
+     {
+      modal == true ? <Modal/> : null
+     }
     </div>
   );
 }
+//모달이라는 html을 알아보기 쉽게 component로 줄여쓰기 function을 앱function밖에 만들어주고 html을 밖고
+//함수명을 정해준 뒤 html에 적용하면 된다.<Modal/> = <Modal></Modal>
+function Modal(){
+  return(
+  <div className='modal'>
+      <h4>제목</h4>
+      <p>날짜</p>
+      <p>상세내용</p>
+      </div>
+      
+  )
+}
+
 
 export default App;
 
